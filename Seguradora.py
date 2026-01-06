@@ -1,5 +1,4 @@
 ##Bibliotecas 
-
 import pandas as pd# manipulação de dados
 from sklearn.preprocessing import StandardScaler, OneHotEncoder 
 ##StandardScaler - nromalizar variaveis numericas
