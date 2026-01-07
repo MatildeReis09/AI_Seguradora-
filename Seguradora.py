@@ -33,9 +33,10 @@ peso_disease = {
 ## criar indice de doencas
 ## juantar todas as doenças e criar um só parametro que as engloba a todas
 df ['index_gravidade'] = 0 
-for disease, peso in peso_disease.item(): 
+for disease, peso in peso_disease.items(): 
     df['index_gravidade'] += df[disease] * peso
 ## como no dataset esta (0ou 1) caso tenha ou não a doença apenas se multiplica pelo pelo
+##o valor do inidce é a soma
 
 ##tratamento de missing values
 df_original = df.drop(columns=['alcohol_freq'])
