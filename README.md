@@ -62,9 +62,11 @@ Data cleaning ( Fase muito importamte no Machine learning ):
 
 -> Tratamento de Valores nulos ( missing values)
 ou preenchemos com "Unknown" , com o valor mais comum ou remove-se a coluna 
+    -eleminação da coluna alccol, embora valiosa para o calculo por ter muitos valores em  falta não vai ser utilizado 
+    cerca de 30% de dados em falta
 
 -> Codigicação 
-Converter parametros com variaveis de texto em numeros ( binarios ou ordinaç). uma vez que se vai medir a distancia tem de estar tudo na mesma forma
+Converter parametros com variaveis de texto em numeros ( binarios ou ordinario ). uma vez que se vai medir a distancia tem de estar tudo na mesma forma
 
 -> Normalização/Scaling ( importante para não haver decisões erradas)
 colocar tudo na mesma escala (0-1), pois o k-Means calcula a distancia entre os pontos. colocar todos os parametros a falar a mesma lingua.

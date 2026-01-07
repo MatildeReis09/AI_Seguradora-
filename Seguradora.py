@@ -24,7 +24,7 @@ peso_disease = {
     'hypertension': 2,
     'asthma': 2,
     'arthritis': 2, 
-    'mental_health': 2  ##falar com eles (2ou 3 )como querem designar
+    'mental_health': 2 
 }
 
 ## indice de doencas
@@ -35,4 +35,37 @@ for disease, peso in peso_disease.item(): ##depara aso pares
 ## como no dataset esta (0ou 1) caso tenha ou não a doença apenas se multiplica pelo pelo
 
 ##tratamento de missing values
+df = df.drop(columns=['alcohol_freq'])
+
+# contagem total de nulos na coluna
+nulos_total = df['alcohol_freq'].isnull().sum()
+print(f"Total de linhas sem informação de álcool: {nulos_total}")
+
+# Percentagem de dados em falta
+percentagem = (nulos_total / len(df)) * 100
+print(f"\nPercentagem de buracos nos dados: {percentagem:.2f}%")
+
+
+##codificação 
+#aprende as paçavras e associa a numeros
+le = LabelEncoder()
+df['smoker'] = le.fit_transform(df['smoker'])
+
+#seleção de parametros para o calculo 
+Calculo_risk_score = [
+    'age',
+    'smoker',
+    'hospitalizations_last_3yrs',
+    'index_gravidade',
+    'claims_count', 
+]
+
+# 4. Preparação do Input do Modelo
+X_features = ['age', 'smoker', 'hospitalizations_last_3yrs', 'index_gravidade', 'claims_count']
+X = df[X_features].copy()
+X = X.fillna(X.mean()) # contra nulos
+
+## scaling/normalização 
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
 
