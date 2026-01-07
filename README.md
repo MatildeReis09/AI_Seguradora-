@@ -29,7 +29,7 @@ Parametros a ter em conta para o calculo do risk score:
     -nº hospitalizações nos ultimos 3 anos
     -clain count (nº de sinistros)
     -dependentes ?
-    -index_desease
+    -index_desease  ( dar importancia diferente as doenças)
 
 -> Agrupar parametros, pode ser util
 Assim em vez de dar 10 colunas diferentes (uma de cada doença), cria-se uma nova coluna doencas_index.   
@@ -76,3 +76,4 @@ colocar tudo na mesma escala (0-1), pois o k-Means calcula a distancia entre os 
     trasforma os dados paar que a média seja 0 e o desvio padrao seja 1
     " este parametro esta a quantos desvios da média?"
     bom quando há outliers ( provavel de acontecer neste caso por exemplo no parametro do "Income" e "hospitalizations") 
+
