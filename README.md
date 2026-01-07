@@ -22,10 +22,10 @@ Duas possibilidades da divisao do risk score:
 - maior risco de erro
 
 
-Parametros a ter em conta para o calculo do risk score: 
+Parametros ter em conta para o calculo do risk score: 
     -idade
     -smoker
-    -frequencia alcool
+    -frequencia alcool 
     -nº hospitalizações nos ultimos 3 anos
     -clain count (nº de sinistros)
     -dependentes ?
@@ -79,4 +79,18 @@ colocar tudo na mesma escala (0-1), pois o k-Means calcula a distancia entre os 
     " este parametro esta a quantos desvios da média?"
     bom quando há outliers ( provavel de acontecer neste caso por exemplo no parametro do "Income" e "hospitalizations") 
 
-- Correlação nula (ou zero) significa que não existe uma relação linear previsível entre duas variáveis;
+
+Parameltros usados realmente para o calculo: 
+    'age',
+    'smoker',
+    'annual_medical_cost',
+    'index_gravidade',
+    'claims_count', 
+
+atenção aos parametros 'annual_medical_cost' e claims_count , podem ser muito parecidos
+Calculo da coreelação entre os dois parametros 
+- Correlação nula (0.19) significa que não existe uma relação linear previsível entre duas variáveis
+Pode se usar ambos para capturar as diferentes dimensões do risco. 
+Se usasse só o custo anual, não se sabia a utilização do cliente.
+Se usasse só a quantidade de claims, ignorava o impacto financeiro de doenças graves isoladas. 
+- permite criar grupos mais precisos e detalhados 
