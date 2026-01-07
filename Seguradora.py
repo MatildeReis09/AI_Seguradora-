@@ -14,7 +14,7 @@ from sklearn.cluster import KMeans # para o algoritmos
 
 
 try:
-    df = pd.read_excel("ECF_2.xlsx")
+    df = pd.read_excel("excel_dataset/ECF_2.xlsx")
     print("Ficheiro carregado com sucesso!")
 except Exception as doc : 
     print(f"Erro ao carregar o ficheiro: {doc}")
@@ -51,7 +51,7 @@ for disease, peso in peso_disease.items():
 df_limpo = df.drop(columns=['alcohol_freq']) #remove valores null
 df_limpo = df_limpo[df_limpo['age'] != 0] #remove idades = 0
 
-print("chegou aqui")
+print("estou aqui")
 ##codificação 
 #aprende as paçavras e associa a numeros
 le = LabelEncoder()
@@ -62,7 +62,7 @@ df_limpo['smoker'] = le.fit_transform(df_limpo['smoker'])
 Collumns_risk_score = [
     'age',
     'smoker',
-    'hospitalizations_last_3yrs',
+    'annual_medical_cost',
     'index_gravidade',
     'claims_count', 
 ]
