@@ -12,9 +12,16 @@ from sklearn.model_selection import train_test_split
 # dividir o data set em teste e treino
 from sklearn.cluster import KMeans # para o algoritmos
 
-df = pd.read_excel("ECF_2.xlsx")
-## 1- Processo Data cleaning 
 
+try:
+    df = pd.read_excel("ECF_2.xlsx")
+    print("Ficheiro carregado com sucesso!")
+except Exception as doc : 
+    print(f"Erro ao carregar o ficheiro: {doc}")
+
+
+
+## 1- Processo Data cleaning 
 
 #definir peso/ importancia das doenças 
 peso_disease = {
@@ -38,22 +45,16 @@ for disease, peso in peso_disease.items():
 ## como no dataset esta (0ou 1) caso tenha ou não a doença apenas se multiplica pelo pelo
 ##o valor do inidce é a soma
 
-##tratamento de missing values
-df_original = df.drop(columns=['alcohol_freq'])
-
-# contagem total de nulos na coluna
-nulos_total = df['alcohol_freq'].isnull().sum()
-print(f"Total de linhas sem informação de álcool: {nulos_total}")
-
-# Percentagem de dados em falta
-percentagem = (nulos_total / len(df)) * 100
-print(f"\nPercentagem de buracos nos dados: {percentagem:.2f}%")
+##tratamento de missing values or null
+df_limpo = df.drop(columns=['alcohol_freq']) #remove valores null
+df_limpo = df_limpo[df['age'] != 0] #remove idades = 0
 
 
 ##codificação 
 #aprende as paçavras e associa a numeros
 le = LabelEncoder()
-df_original['smoker'] = le.fit_transform(df_original['smoker'])
+df_limpo['smoker'] = le.fit_transform(df_limpo['smoker'])
+
 
 #seleção de parametros para o calculo 
 Collumns_risk_score = [
@@ -66,7 +67,10 @@ Collumns_risk_score = [
 
 
 ##criar dataset limpo
-df_trabalho = df_original[Collumns_risk_score ].copy()
+df_trabalho = df_limpo[Collumns_risk_score ].copy()
+
+df_trabalho = df_trabalho.fillna(df_trabalho.mean())# caso haja um buraco
+# calcula a media e preenche o buraco 
 
 ## scaling/normalização 
 scaler = StandardScaler()
@@ -74,5 +78,4 @@ X_scaled = scaler.fit_transform(df_trabalho)
 
 
 ##algoritmo clustering K-means
-
 
