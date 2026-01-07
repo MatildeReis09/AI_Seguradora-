@@ -37,6 +37,8 @@ peso_disease = {
     'mental_health': 2 
 }
 
+print("chegou aqui")
+
 ## criar indice de doencas
 ## juantar todas as doenças e criar um só parametro que as engloba a todas
 df ['index_gravidade'] = 0 
@@ -47,9 +49,9 @@ for disease, peso in peso_disease.items():
 
 ##tratamento de missing values or null
 df_limpo = df.drop(columns=['alcohol_freq']) #remove valores null
-df_limpo = df_limpo[df['age'] != 0] #remove idades = 0
+df_limpo = df_limpo[df_limpo['age'] != 0] #remove idades = 0
 
-
+print("chegou aqui")
 ##codificação 
 #aprende as paçavras e associa a numeros
 le = LabelEncoder()
@@ -65,10 +67,8 @@ Collumns_risk_score = [
     'claims_count', 
 ]
 
-
 ##criar dataset limpo
 df_trabalho = df_limpo[Collumns_risk_score ].copy()
-
 df_trabalho = df_trabalho.fillna(df_trabalho.mean())# caso haja um buraco
 # calcula a media e preenche o buraco 
 
@@ -76,6 +76,6 @@ df_trabalho = df_trabalho.fillna(df_trabalho.mean())# caso haja um buraco
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(df_trabalho)
 
-
+df_trabalho.to_excel("ECF_2_RESULTADO_FINAL.xlsx", index=False)
+print("ficheiro 'ECF_2_RESULTADO_FINAL.xlsx' criado com sucesso")
 ##algoritmo clustering K-means
-
