@@ -79,3 +79,4 @@ colocar tudo na mesma escala (0-1), pois o k-Means calcula a distancia entre os 
     " este parametro esta a quantos desvios da média?"
     bom quando há outliers ( provavel de acontecer neste caso por exemplo no parametro do "Income" e "hospitalizations") 
 
+- Correlação nula (ou zero) significa que não existe uma relação linear previsível entre duas variáveis;
