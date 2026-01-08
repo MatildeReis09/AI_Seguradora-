@@ -62,9 +62,9 @@ df_limpo['smoker'] = le.fit_transform(df_limpo['smoker'])
 Collumns_risk_score = [
     'age',
     'smoker',
-    'annual_medical_cost',
     'index_gravidade',
-    'claims_count', 
+    'final_profit',
+    'sinistralidade',
 ]
 
 ##criar dataset limpo
@@ -78,4 +78,4 @@ X_scaled = scaler.fit_transform(df_trabalho)
 
 df_trabalho.to_excel("ECF_2_RESULTADO_FINAL.xlsx", index=False)
 print("ficheiro 'ECF_2_RESULTADO_FINAL.xlsx' criado com sucesso")
-##algoritmo clustering K-means
+

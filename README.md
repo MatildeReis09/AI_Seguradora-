@@ -94,3 +94,10 @@ Pode se usar ambos para capturar as diferentes dimensões do risco.
 Se usasse só o custo anual, não se sabia a utilização do cliente.
 Se usasse só a quantidade de claims, ignorava o impacto financeiro de doenças graves isoladas. 
 - permite criar grupos mais precisos e detalhados 
+
+- annul_medical_cost é um parametro de media ponderada, foi descartado 
+calculo do 
+
+
+Variaveis calculadas no excel 
+- 
