@@ -1,5 +1,9 @@
 seguradora ideias
 
+# Definimos a importância de cada variável no risco final
+pesos_finais = np.array([0.15, 0.15, 0.40, 0.10, 0.20]) # Age, Smoker, Gravidade, Profit, Sinistralidade
+df_trabalho['MEU_RISK_SCORE'] = (X_scaled @ pesos_finais) * 100
+
 # --- IMPLEMENTAÇÃO DA INTELIGÊNCIA ARTIFICIAL ---
 
 # 7. Método do Cotovelo (Para justificar o K=5 no relatório)
