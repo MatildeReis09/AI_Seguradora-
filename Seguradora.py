@@ -78,8 +78,7 @@ df_limpo [colunas_doenças] = df_limpo[colunas_doenças].fillna(0)
 
 
 ##codificação de variaveis categoricas
-#aprende as paçavras e associa a numeros
-
+#aprende as palavras e associa a numeros
 # Substituir porque se não da problemas no calculo 
 mapa_smoker = {'Never': 0, 'Former': 1, 'Current': 2}
 df_limpo['smoker'] = df_limpo['smoker'].map(mapa_smoker)
@@ -111,8 +110,33 @@ df_trabalho = df_trabalho.fillna(df_trabalho.mean())# caso haja um buraco
 # utilização do minmax escala (0-100) , da valores de 0-1
 scaler = MinMaxScaler()
 X_scaled = scaler.fit_transform(df_trabalho)
+
 df_trabalho_scaled = pd.DataFrame(scaler.fit_transform(df_trabalho), columns=Collumns_risk_score)
 
-df_trabalho_scaled.to_excel("ECF_2_RESULTADO_FINAL.xlsx", index=False)
-print("ficheiro 'ECF_2_RESULTADO_FINAL.xlsx' criado com sucesso")
+#df_trabalho_scaled.to_excel("ECF_2_RESULTADO_FINAL.xlsx", index=False)
+#print("ficheiro 'ECF_2_RESULTADO_FINAL.xlsx' criado com sucesso")
 
+
+##calculo do risck score
+
+try:
+    df_trabalho = pd.read_excel("ECF_2_RESULTADO_FINAL.xlsx")
+    print("Ficheiro carregado com sucesso!")
+except Exception as e: 
+    print(f"Erro ao carregar o ficheiro: {e}")
+
+colunas_para_score = ['age', 'smoker', 'index_gravidade', 'final_profit', 'sinistralidade']
+pesos_finais = np.array([0.10, 0.10, 0.30, 0.30, 0.20])
+#  Definir os pesos e calcular o Score
+
+
+# O operador @ faz a multiplicação dos valores pelos pesos
+# Multiplicamos por 100 para ter uma escala de 0 a 100
+df_trabalho['NEW_RISK_SCORE'] = df_trabalho[colunas_para_score].values @ pesos_finais
+#df_trabalho_scaled['NEW_RISK_SCORE'] = (X_scaled @ pesos_finais) * 100
+
+# 4. Gravar o novo documento com a coluna do score incluída
+df_trabalho.to_excel("ECF_2_LIMPO_COM_SCORE.xlsx", index=False)
+
+
+print("Sucesso! Coluna 'NEW_RISK_SCORE' adicionada e ficheiro guardado.")
