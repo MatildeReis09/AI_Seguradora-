@@ -46,13 +46,14 @@ for disease, peso in peso_disease.items():
 ##o valor do inidce é a soma
 
 
+
 ## 1- Processo Data cleaning 
 
 ##tratamento de missing values or null ou <0
-df_limpo = df.drop(columns=['alcohol_freq']) #remove valores null
+df_limpo = df.drop(columns=['alcohol_freq'], errors='ignore').copy() #remove valores null
 
 colunas_obrigatorias = ['age', 'smoker'] 
-df_limpo = df.dropna(subset=colunas_obrigatorias)
+df_limpo = df_limpo.dropna(subset=colunas_obrigatorias)
 
 df_limpo = df_limpo[df_limpo['age'] != 0] #remove idades = 0
 #no caso de a sinistralidade = 0 , assume-se 0 sinitros registado 
@@ -69,14 +70,14 @@ df_limpo [colunas_doenças] = df_limpo[colunas_doenças].fillna(0)
 
 ##codificação de variaveis categoricas
 #aprende as paçavras e associa a numeros
-le = LabelEncoder()
-if 'smoker' in df_limpo.columns:
-    df_limpo['smoker'] = le.fit_transform(df_limpo['smoker'].astype(str))
+
+# Substituir porque se não da problemas no calculo 
+mapa_smoker = {'Never': 0, 'Former': 1, 'Current': 2}
+df_limpo['smoker'] = df_limpo['smoker'].map(mapa_smoker)
+
+print(" categoria smoker alteradas")
 
 
-print("Categorias encontradas:", le.classes_)
-for i, categoria in enumerate(le.classes_):
-    print(f"O número {i} corresponde a: {categoria}")
 
 print("estou aqui, datacleaning completo")
 
@@ -101,15 +102,9 @@ df_trabalho = df_trabalho.fillna(df_trabalho.mean())# caso haja um buraco
 # utilização do minmax escala (0-100) , da valores de 0-1
 scaler = MinMaxScaler()
 X_scaled = scaler.fit_transform(df_trabalho)
+df_trabalho_scaled = pd.DataFrame(scaler.fit_transform(df_trabalho), columns=Collumns_risk_score)
 
-
-# Substituir porque se não da problemas no calculo 
-mapa_smoker = {'Never': 0, 'Former': 1, 'Current': 2}
-df_limpo['smoker'] = df_limpo['smoker'].map(mapa_smoker)
-
-print(" categoria smoker alteradas")
-
-df_trabalho.to_excel("ECF_2_RESULTADO_FINAL.xlsx", index=False)
+df_trabalho_scaled.to_excel("ECF_2_RESULTADO_FINAL.xlsx", index=False)
 print("ficheiro 'ECF_2_RESULTADO_FINAL.xlsx' criado com sucesso")
 
 
