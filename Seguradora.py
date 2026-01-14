@@ -108,25 +108,36 @@ df_trabalho = df_trabalho.fillna(df_trabalho.mean())# caso haja um buraco
 
 ## scaling/normalização 
 # utilização do minmax escala (0-100) , da valores de 0-1
+#scaler = MinMaxScaler()
+#X_scaled = scaler.fit_transform(df_trabalho)
+
+df_trabalho_scaled = pd.DataFrame(scaler.fit_transform(df_trabalho), columns=Collumns_risk_score)
+
+colunas_para_score = ['age', 'smoker', 'index_gravidade', 'final_profit', 'sinistralidade']
+pesos_finais = np.array([0.10, 0.10, 0.30, 0.30, 0.20])
+
+df_trabalho['NEW_RISK_SCORE'] = df_trabalho[colunas_para_score].values @ pesos_finais
+
+## scaling/normalização 
+#utilização do minmax escala (0-100) , da valores de 0-1
 scaler = MinMaxScaler()
 X_scaled = scaler.fit_transform(df_trabalho)
 
 df_trabalho_scaled = pd.DataFrame(scaler.fit_transform(df_trabalho), columns=Collumns_risk_score)
 
-#df_trabalho_scaled.to_excel("ECF_2_RESULTADO_FINAL.xlsx", index=False)
-#print("ficheiro 'ECF_2_RESULTADO_FINAL.xlsx' criado com sucesso")
+df_trabalho_scaled.to_excel("ECF_2_RESULTADO_FINAL_naonormalizado.xlsx", index=False)
+print("ficheiro 'ECF_2_RESULTADO_FINAL.xlsx' criado com sucesso")
 
 
 ##calculo do risck score
 
 try:
-    df_trabalho = pd.read_excel("ECF_2_RESULTADO_FINAL.xlsx")
-    print("Ficheiro carregado com sucesso!")
+   df_trabalho = pd.read_excel("ECF_2_RESULTADO_FINAL.xlsx")
+   print("Ficheiro carregado com sucesso!")
 except Exception as e: 
     print(f"Erro ao carregar o ficheiro: {e}")
 
-colunas_para_score = ['age', 'smoker', 'index_gravidade', 'final_profit', 'sinistralidade']
-pesos_finais = np.array([0.10, 0.10, 0.30, 0.30, 0.20])
+
 #  Definir os pesos e calcular o Score
 
 
