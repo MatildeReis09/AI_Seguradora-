@@ -45,6 +45,15 @@ for disease, peso in peso_disease.items():
 ## como no dataset esta (0ou 1) caso tenha ou não a doença apenas se multiplica pelo pelo
 ##o valor do inidce é a soma
 
+# contagem total de nulos na coluna
+## para saber se vale a pena utilizar o parametro 
+
+nulos_total = df['alcohol_freq'].isnull().sum()
+print(f"Total de linhas sem informação de álcool: {nulos_total}")
+
+# Percentagem de dados em falta
+percentagem = (nulos_total / len(df)) * 100
+print(f"\nPercentagem de buracos nos dados: {percentagem:.2f}%")
 
 
 ## 1- Processo Data cleaning 
@@ -107,7 +116,3 @@ df_trabalho_scaled = pd.DataFrame(scaler.fit_transform(df_trabalho), columns=Col
 df_trabalho_scaled.to_excel("ECF_2_RESULTADO_FINAL.xlsx", index=False)
 print("ficheiro 'ECF_2_RESULTADO_FINAL.xlsx' criado com sucesso")
 
-
-
-
-## calculo do risck score

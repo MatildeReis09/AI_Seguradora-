@@ -102,8 +102,9 @@ calculo do
 Variaveis calculadas no excel 
 - 
 
-
+```bash
 
 Bibliografia : 
 - https://stackoverflow.com/questions/51237635/difference-between-standard-scaler-and-minmaxscaler
 
+```
