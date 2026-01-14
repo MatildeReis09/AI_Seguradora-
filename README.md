@@ -71,13 +71,13 @@ Converter parametros com variaveis de texto em numeros ( binarios ou ordinario )
 -> Normalização/Scaling ( importante para não haver decisões erradas)
 colocar tudo na mesma escala (0-1), pois o k-Means calcula a distancia entre os pontos. colocar todos os parametros a falar a mesma lingua.
 
-    -> Min-Max Scaling 
-    todos os valores entre 0-1
+-> Min-Max Scaling 
+todos os valores entre 0-1
 
-    -> Standard Scaling ( a usar)
-    trasforma os dados paar que a média seja 0 e o desvio padrao seja 1
-    " este parametro esta a quantos desvios da média?"
-    bom quando há outliers ( provavel de acontecer neste caso por exemplo no parametro do "Income" e "hospitalizations") 
+-> Standard Scaling ( a usar)
+trasforma os dados paar que a média seja 0 e o desvio padrao seja 1
+" este parametro esta a quantos desvios da média?"
+ bom quando há outliers ( provavel de acontecer neste caso por exemplo no parametro do "Income" e "hospitalizations") 
 
 
 Parameltros usados realmente para o calculo: 
