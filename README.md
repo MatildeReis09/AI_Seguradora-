@@ -1,5 +1,76 @@
 # AI_Seguradora-
 
+Trabalho de Machine learning : Previsão do calculo do risck score
+
+1. Dataset 
+
+O conjuto de dados utilizado é composto por aproxiamdamente 10000 registos de clientes de uma seguradora, contendo todo o tipo de informações desde demograficas, a cínicas  e comportamentais.
+
+Identificamos a variavel alvo como risck-score, indicando se o cliente pertence ou não a um grupo alto de risco.
+
+2. Matodologia 
+
+Para o calculo desta variavel, adota-se uma abordagem de aprendizagem supervisionada  para o previsão do risck score. 
+
+O processo foi realizado por fases: 
+
+    1- analise exploratoria dos dados 
+    2- definição da variavel- alvo 
+
+    Target - Risck_score ( continuo [ 0-100])
+    variavel Y 
+
+    A variavel -alvo ou Target é a componente central de um modelo. 
+    É a variavel especifica que o modelo tenta prever ou explicar. Represneta a resposta que queremos que o modelo aprenda e preveja de um conjunto de dados.
+
+    3- seleção de variaveis mais relevantes
+
+    Variaveis X
+
+    Age -> Variavel continua esatvel, com forte relação com o risco de saúde 
+    smoker -> Variavel comportamental de risco
+    chronical_disease_count -> "Resume" o estado de vida do cliente
+    employment_status -> Reflete a esatbilidade socioeconomica e a capacidade de acesso a cuidades
+    income -> Reflete o risco financeiro e o acesso à saúde
+
+    4- Modelo 
+
+    Regressão Logística ->interpretavel
+    Random Forest -> modelo não lienar
+
+    5- datacleaning 
+
+
+
+    6- divisão das variaveis em teste e treino 
+    7- treino do modelo
+    8- aavaliação 
+
+O modelo foi treinado e comparado entre diferentes modelos , como Regressão Logística e Random Forest. Avaliando o seu desenpanho de acordo com as metricas : accuracy, precision, F1-score, sendo o melhor modelo selecionado com base no melhor equilibrio entre o desempenho preditivo e interpretabilidade.
+
+3. Comparações & Resultados
+
+4. Conclusões 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(Variaveis escolhidas)
+As variáveis explicativas selecionadas para o modelo de previsão do risk score incluem características demográficas (age), comportamentais (smoker) e históricas relacionadas com sinistros (index_gravidade, sinistralidade). Estas variáveis foram escolhidas por apresentarem forte relação teórica e empírica com o risco associado aos clientes. Variáveis que poderiam introduzir data leakage, como indicadores de rentabilidade futura, foram excluídas para garantir a robustez do modelo.
+
+
+
+
 Duas possibilidades da divisao do risk score: 
 
 1-3 ( nivel baixo, nivel medio, nivel alto): 
@@ -104,7 +175,7 @@ Variaveis calculadas no excel
 
 ```bash
 
-Bibliografia : 
+5. Bibliografia : 
 - https://stackoverflow.com/questions/51237635/difference-between-standard-scaler-and-minmaxscaler
 
 ```
