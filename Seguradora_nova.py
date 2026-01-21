@@ -152,5 +152,55 @@ df_final [ 'Risck_score_real'] = y_test
 df_final ['Previsão_linearRegression'] = y_pred_lin
 df_final ['previsão_randomForest']= y_pred_rf
 
-df_final.to_excel("Previsoes_risck_seguradora.xlsx", index = False)
+#df_final.to_excel("Previsoes_risck_seguradora.xlsx", index = False)
 
+## utilizar o k means para divisão dos dados em categorias
+#reshape é pq o kmeans precisa de uma matriz
+risck_real = y_test.values.reshape(-1,1)
+
+##encontrar 3 grupos 
+kmeans = KMeans(n_clusters= 3, random_state=42, n_init= 10)
+clusters = kmeans.fit_predict(risck_real)
+
+##organizar pois o clustering da nomes aleatorios
+centers = kmeans.cluster_centers_.flatten()
+ordem_clusters = np.argsort(centers)
+mapeamento = {antigo: novo for novo, antigo in enumerate(ordem_clusters)}
+clusters_ordenados = np.array([mapeamento[c] for c in clusters])
+
+#tabela de analides
+df_kmeans = pd.DataFrame({
+    'Real': y_test,
+    'Prev_Linear': y_pred_lin,
+    'Prev_RF': y_pred_rf,
+    'Cluster': clusters_ordenados
+})
+
+df_kmeans['Erro_Linear'] = abs(df_kmeans['Real'] - df_kmeans['Prev_Linear'])
+df_kmeans['Erro_RF'] = abs(df_kmeans['Real'] - df_kmeans['Prev_RF'])
+
+# 5. Resultados por Cluster (Classificação Automática)
+analise_clusters = df_kmeans.groupby('Cluster').agg({
+    'Real': ['min', 'max', 'mean'],
+    'Erro_Linear': 'mean',
+    'Erro_RF': 'mean'
+})
+
+print("\n   Análise por Grupos Formados pelo K-Means ")
+print(analise_clusters)
+
+## grafico  grupos do K-Means
+plt.figure(figsize=(10, 6))
+cores = ['blue', 'orange', 'green']
+labels = ['Risco Baixo', 'Risco Médio', 'Risco Alto']
+
+for i in range(3):
+    dados = df_kmeans[df_kmeans['Cluster'] == i]
+    plt.scatter(dados['Real'], dados['Prev_RF'], c=cores[i], label=labels[i], alpha=0.5)
+
+plt.plot([0, 1], [0, 1], '--r', label='Ideal')
+plt.title("Classificação de Grupos por K-Means")
+plt.xlabel("Risco Real")
+plt.ylabel("Previsão (Random Forest)")
+plt.legend()
+plt.show()

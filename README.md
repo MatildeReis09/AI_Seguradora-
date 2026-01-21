@@ -14,37 +14,57 @@ Para o calculo desta variavel, adota-se uma abordagem de aprendizagem supervisio
 
 O processo foi realizado por fases: 
 
-    1- analise exploratoria dos dados 
-    2- definição da variavel- alvo 
+1- analise exploratoria dos dados 
+2- definição da variavel- alvo 
 
-    Target - Risck_score ( continuo [ 0-100])
-    variavel Y 
+Target - Risck_score ( continuo [ 0-100])
+variavel Y 
 
-    A variavel -alvo ou Target é a componente central de um modelo. 
-    É a variavel especifica que o modelo tenta prever ou explicar. Represneta a resposta que queremos que o modelo aprenda e preveja de um conjunto de dados.
+A variavel -alvo ou Target é a componente central de um modelo. 
+É a variavel especifica que o modelo tenta prever ou explicar. Represneta a resposta que queremos que o modelo aprenda e preveja de um conjunto de dados.
 
-    3- seleção de variaveis mais relevantes
+3- seleção de variaveis mais relevantes
 
-    Variaveis X
+Variaveis X
 
-    Age -> Variavel continua esatvel, com forte relação com o risco de saúde 
-    smoker -> Variavel comportamental de risco
-    chronical_disease_count -> "Resume" o estado de vida do cliente
-    employment_status -> Reflete a esatbilidade socioeconomica e a capacidade de acesso a cuidades
-    income -> Reflete o risco financeiro e o acesso à saúde
+Age -> Variavel continua esatvel, com forte relação com o risco de saúde 
+smoker -> Variavel comportamental de risco
+chronical_disease_count -> "Resume" o estado de vida do cliente
+employment_status -> Reflete a esatbilidade socioeconomica e a capacidade de acesso a cuidades
+income -> Reflete o risco financeiro e o acesso à saúde
 
-    4- Modelo 
+4- Modelo 
 
-    Regressão Logística ->interpretavel
-    Random Forest -> modelo não lienar
+Regressão Logística ->interpretavel
+Random Forest -> modelo não lienar
 
-    5- datacleaning 
+5- datacleaning (Fase muito importamte no Machine learning)
+
+ -> Tratamento de Valores nulos ( missing values)
+ou preenchemos com "Unknown" , com o valor mais comum ou remove-se a coluna 
+-eleminação da coluna alccol, embora valiosa para o calculo por ter muitos valores em  falta não vai ser utilizado 
+cerca de 30% de dados em falta
+
+ -> Codigicação 
+Converter parametros com variaveis de texto em numeros ( binarios ou ordinario ). uma vez que se vai medir a distancia tem de estar tudo na mesma forma
+
+ -> Normalização/Scaling ( importante para não haver decisões erradas)
+colocar tudo na mesma escala (0-1), pois o k-Means calcula a distancia entre os pontos. colocar todos os parametros a falar a mesma lingua.
+
+ -> Min-Max Scaling 
+todos os valores entre 0-1
+
+ -> Standard Scaling ( a usar)
+trasforma os dados paar que a média seja 0 e o desvio padrao seja 1
+" este parametro esta a quantos desvios da média?"
+bom quando há outliers ( provavel de acontecer neste caso por exemplo no parametro do "Income" e "hospitalizations") 
 
 
 
-    6- divisão das variaveis em teste e treino 
-    7- treino do modelo
-    8- aavaliação 
+
+6- divisão das variaveis em teste e treino 
+7- treino do modelo
+8- aavaliação 
 
 O modelo foi treinado e comparado entre diferentes modelos , como Regressão Logística e Random Forest. Avaliando o seu desenpanho de acordo com as metricas : accuracy, precision, F1-score, sendo o melhor modelo selecionado com base no melhor equilibrio entre o desempenho preditivo e interpretabilidade.
 
@@ -138,28 +158,6 @@ o que é  a inercia ? - propriedade da matéria que faz com que um corpo resista
 Inicialmente a curva desce rapidamente e depois estabiliza, o ponto onde a descida abranda e faz uma curva "cotovelo" é o numero ideal de grupos. 
 
 
-Data cleaning ( Fase muito importamte no Machine learning ):
-
--> Tratamento de Valores nulos ( missing values)
-ou preenchemos com "Unknown" , com o valor mais comum ou remove-se a coluna 
-    -eleminação da coluna alccol, embora valiosa para o calculo por ter muitos valores em  falta não vai ser utilizado 
-    cerca de 30% de dados em falta
-
--> Codigicação 
-Converter parametros com variaveis de texto em numeros ( binarios ou ordinario ). uma vez que se vai medir a distancia tem de estar tudo na mesma forma
-
--> Normalização/Scaling ( importante para não haver decisões erradas)
-colocar tudo na mesma escala (0-1), pois o k-Means calcula a distancia entre os pontos. colocar todos os parametros a falar a mesma lingua.
-
--> Min-Max Scaling 
-todos os valores entre 0-1
-
--> Standard Scaling ( a usar)
-trasforma os dados paar que a média seja 0 e o desvio padrao seja 1
-" este parametro esta a quantos desvios da média?"
- bom quando há outliers ( provavel de acontecer neste caso por exemplo no parametro do "Income" e "hospitalizations") 
-
-
 Parameltros usados realmente para o calculo: 
     'age',
     'smoker',
@@ -175,12 +173,7 @@ Se usasse só o custo anual, não se sabia a utilização do cliente.
 Se usasse só a quantidade de claims, ignorava o impacto financeiro de doenças graves isoladas. 
 - permite criar grupos mais precisos e detalhados 
 
-- annul_medical_cost é um parametro de media ponderada, foi descartado 
-calculo do 
 
-
-Variaveis calculadas no excel 
-- 
 
 ```bash
 
