@@ -50,23 +50,32 @@ O modelo foi treinado e comparado entre diferentes modelos , como Regressão Log
 
 3. Comparações & Resultados
 
+                Model      RMSE       MAE        R2
+0  Linear Regressions  0.051047  0.038190  0.957667
+1       Random Forest  0.044366  0.034176  0.968023
+
+De acordo com os resultados obtidos o modelo "rabdom" forest" apresenta um R2 superior em comparação com o do modelo da regressão linear. O mesmo acontece em relação aos parametros do erro, em todas as  emtricas o Random forest demonstra um menor erro e uma maior precisão.
+
+
+Anlise do grafico: 
+
+- linhas diagonais muito proximas, pouco ruido
+- o modelo consegue esta a conseguir prever o risck score quase perfeito (R2 = 96%)
+
+- espaços em branco entre as linhas são valores de risco que o modelo raramente preve, devido a combinação de caracteristicas que fazem no saltar de um nivel para outro.
+ 
+
 4. Conclusões 
 
+nota- o excel gerado no fianl apenas contem os 20% os dados de teste
+
+Analisando os dados do novo excel, conseguimos ver que o random forest tem metricas globais melhores, mas que a disputa é equilibrada. 
+
+a regressão linear em 45% das vezes realmente granha reraltivamente ao outro modelo, e assim olhando pleas linhas podemos ter a sensação que o melhro é o modelo da regressão lienar.
+
+Em suma o modelo random forest é o melhor para utilizar neste contexto , pois é mais preciso a difentificar quem são os clientes de ALto risco ( > prejuizo) e os de baixo risco. Enquanto a regressão linear apenas funciona bem para valores medios, falhando em casos especiais/ extremos.
 
 
-
-
-
-
-
-
-
-
-
-
-
-(Variaveis escolhidas)
-As variáveis explicativas selecionadas para o modelo de previsão do risk score incluem características demográficas (age), comportamentais (smoker) e históricas relacionadas com sinistros (index_gravidade, sinistralidade). Estas variáveis foram escolhidas por apresentarem forte relação teórica e empírica com o risco associado aos clientes. Variáveis que poderiam introduzir data leakage, como indicadores de rentabilidade futura, foram excluídas para garantir a robustez do modelo.
 
 
 
