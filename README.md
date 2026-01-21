@@ -60,10 +60,18 @@ trasforma os dados paar que a média seja 0 e o desvio padrao seja 1
 bom quando há outliers ( provavel de acontecer neste caso por exemplo no parametro do "Income" e "hospitalizations") 
 
 
-
-
 6- divisão das variaveis em teste e treino 
+
+20% da amostra é para testes
+
 7- treino do modelo
+
+modelo 1- regressão lienar 
+Bom para capturar tendencias globais e relaçoes diretas
+
+modelo 2- random forest
+Utilizado pelo facto de ter a capacidade de captura não linear. 
+Identifica o que a linha reta ignora.
 8- aavaliação 
 
 O modelo foi treinado e comparado entre diferentes modelos , como Regressão Logística e Random Forest. Avaliando o seu desenpanho de acordo com as metricas : accuracy, precision, F1-score, sendo o melhor modelo selecionado com base no melhor equilibrio entre o desempenho preditivo e interpretabilidade.
@@ -71,7 +79,7 @@ O modelo foi treinado e comparado entre diferentes modelos , como Regressão Log
 3. Comparações & Resultados
 
                 Model      RMSE       MAE        R2
-                
+
 0  Linear Regressions  0.051047  0.038190  0.957667
 1       Random Forest  0.044366  0.034176  0.968023
 
@@ -96,9 +104,18 @@ a regressão linear em 45% das vezes realmente granha reraltivamente ao outro mo
 
 Em suma o modelo random forest é o melhor para utilizar neste contexto , pois é mais preciso a difentificar quem são os clientes de ALto risco ( > prejuizo) e os de baixo risco. Enquanto a regressão linear apenas funciona bem para valores medios, falhando em casos especiais/ extremos.
 
+Utilizou -se o k-Means para verificar o  realdesempenho e provar que não é uniforme. 
+
+Risco Baixo - dominado pelo random forest.
+identifica muito bem clientes saudaveis.
+
+Risco Médio- regressão lienar é competitiva e chega a ganhar com 45% dos casos gerais. demonstra a qualidade do modelo que para um nivel "normal/comum" o modelo simples basta.
+
+Risco ALto- dominado pelo random forest. 
+grupo critico, onde o modelo deteta a combinação das caracteristicas que aumentam exponencialmente a gravidade, algo que o modelo lienear não destaca.
 
 
-
+Com isto, afirmamos que embora a regressão linear seja robusta em caso medios, o Random forest é destacado e selecionado como o modelo final. devido a sua superioridade de precisão e deteção em casos extremos (baixos e altos), garantindo que a seguradora identifique de forma corerta os casos que causam maior risco financeiro.
 
 
 Duas possibilidades da divisao do risk score: 
@@ -123,22 +140,6 @@ Duas possibilidades da divisao do risk score:
 - maior risco de erro
 
 
-Parametros ter em conta para o calculo do risk score: 
-    -idade
-    -smoker
-    -frequencia alcool 
-    -nº hospitalizações nos ultimos 3 anos
-    -clain count (nº de sinistros)
-    -dependentes ?
-    -index_desease  ( dar importancia diferente as doenças)
-
--> Agrupar parametros, pode ser util
-Assim em vez de dar 10 colunas diferentes (uma de cada doença), cria-se uma nova coluna doencas_index.   
-cada doença = 1 , doenças cronicas = 2 e o valor do indice vai somando os valores, caso não tenha nada = 0 
-
-O facto de ter muitas doenças é um fator forte e acumulativo de risco 
-
-
 Clusterin? 
 Tecnica de aprendizagem não supervisionaa.
 recebe dados e tenat encontrar grupos que se relacionem entre si, no nosso caso vai segmentar clientes  pelo perfil de risco mais adequanto ou semelhate tendo em conta a caracterização dos parametros sem intervenção humana.
@@ -151,7 +152,7 @@ Calcula "distancia" ( diferença ) entre pontos, logo temos de colcar tudo na me
 Pergunta " quantos grupos devo criar ?" , sera que é o numero que melhor representa a realidade dos dados?
 Valida se o nº de grupos(k=x) faz sentido matematicamente
 
-- medição da inércia 
+- Medição da inércia 
 o que é  a inercia ? - propriedade da matéria que faz com que um corpo resista a mudanças no seu estado de movimento ou repouso. Neste caso a inércia vai dizer-nos a que distancia os clientes se encontram do seu grupo,
 - Quantos mais grupos crias menor é a inércia, grupos com pouca distancia entre eles,
 
@@ -159,26 +160,13 @@ o que é  a inercia ? - propriedade da matéria que faz com que um corpo resista
 Inicialmente a curva desce rapidamente e depois estabiliza, o ponto onde a descida abranda e faz uma curva "cotovelo" é o numero ideal de grupos. 
 
 
-Parameltros usados realmente para o calculo: 
-    'age',
-    'smoker',
-    'annual_medical_cost',
-    'index_gravidade',
-    'claims_count', 
-
-atenção aos parametros 'annual_medical_cost' e claims_count , podem ser muito parecidos
-Calculo da coreelação entre os dois parametros 
-- Correlação nula (0.19) significa que não existe uma relação linear previsível entre duas variáveis
-Pode se usar ambos para capturar as diferentes dimensões do risco. 
-Se usasse só o custo anual, não se sabia a utilização do cliente.
-Se usasse só a quantidade de claims, ignorava o impacto financeiro de doenças graves isoladas. 
-- permite criar grupos mais precisos e detalhados 
-
-
 
 ```bash
 
-5. Bibliografia : 
+Bibliografia : 
 - https://stackoverflow.com/questions/51237635/difference-between-standard-scaler-and-minmaxscaler
+- https://www.geeksforgeeks.org/machine-learning/random-forest-algorithm-in-machine-learning/
+- https://www.datacamp.com/pt/tutorial/sklearn-linear-regression
+- https://www.geeksforgeeks.org/machine-learning/clustering-in-machine-learning/
 
 ```
