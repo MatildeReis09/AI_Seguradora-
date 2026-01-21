@@ -71,6 +71,7 @@ O modelo foi treinado e comparado entre diferentes modelos , como Regressão Log
 3. Comparações & Resultados
 
                 Model      RMSE       MAE        R2
+                
 0  Linear Regressions  0.051047  0.038190  0.957667
 1       Random Forest  0.044366  0.034176  0.968023
 
